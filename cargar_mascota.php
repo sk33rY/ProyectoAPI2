@@ -1,25 +1,22 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 include('conexion.php');
 
-// Realiza la consulta a la base de datos
-$sql = "SELECT nombre, descripcion, lat, lng, tipo FROM mascotas";
+header('Content-Type: application/json');
+
+$sql = "SELECT nombre, descripcion, raza, tamano, color, sexo, tipo_animal, imagen, lat, lng, tipo FROM mascotas";
 $result = $conn->query($sql);
 
 $mascotas = [];
 
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    while($row = $result->fetch_assoc()) {
+        // Decodificar la imagen en base64 si existe
+        $row['imagen'] = !empty($row['imagen']) ? 'data:image/jpeg;base64,' . $row['imagen'] : null;
         $mascotas[] = $row;
     }
 }
 
-// Cerrar la conexión
-$conn->close();
-
-// Devolver los datos como JSON
-header('Content-Type: application/json');
 echo json_encode($mascotas);
+
+$conn->close();
 ?>

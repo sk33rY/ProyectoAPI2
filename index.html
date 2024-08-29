@@ -248,6 +248,15 @@
                 <input type="file" class="form-control" name="imagen" accept="image/*" required>
             </div>
             <div class="mb-3">
+                <select name="tipo_animal" class="form-select" required>
+                    <option value="" disabled selected>Seleccione el tipo de animal</option>
+                    <option value="perro">Perro</option>
+                    <option value="gato">Gato</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
                 <select name="tipo" class="form-select" required>
                     <option value="" disabled selected>Seleccione el estado</option>
                     <option value="perdido">Perdido</option>
